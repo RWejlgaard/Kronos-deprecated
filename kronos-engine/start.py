@@ -2,21 +2,14 @@ import api
 import sys,os
 
 
-def main():
+def start():
     if os.name == 'nt':
         import win_service
-        service = win_service.AppServerSvc()
+        win_service.start()
     else:
         import unix_service
-        service = unix_service.Daemon('/tmp/kronos.pid')
-
-    class uni_service(service):
-        @classmethod
-        def run(cls):
-            api.launch()
-
-    service.start()
+        unix_service.Daemon('/tmp/kronos.pid').start()
 
 
 if __name__ == '__main__':
-    main()
+    start()

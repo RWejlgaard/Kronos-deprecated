@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
@@ -10,3 +11,5 @@ def ping():
 
 def launch():
     app.run(__name__)
+    os.fork()
+    return
